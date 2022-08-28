@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #display{
+            width: 250px;
+            height: 40px;
+            background-color: black;
+            margin: 10px auto;
+            color: white;
+            font-size: 18px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-weight: bold;
+        }
+
+        .calculadora {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+            border: 1px solid gray;
+            border-radius: 5px;
+            width: 350px;
+        }
+
+        .row {
+            display: flex;
+            flex-direction: column;
+            margin: 0 auto;
+        }
+
+        .col {
+            justify-content: space-between;
+        }
+        
+        button {
+            width: 4rem;
+        }
+    </style>
+    <script>
+        let historicoArray = [];
+
+        function inserir(num) {
+        var numero = document.getElementById("display").innerHTML;
+        if(numero.indexOf(",") > -1){
+            document.getElementById('tecla,').disabled = true;
+        };
+        document.getElementById("display").innerHTML = numero + num;
+      }
+      function limpar() {
+        document.getElementById('tecla,').disabled = false; // reseta o butão ,
+        document.getElementById("display").innerHTML = " ";
+      }
+      function apagar() {
+        var resultado = document.getElementById("display").innerHTML;
+        document.getElementById("display").innerHTML = resultado.substring(0, resultado.length - 1);
+      }
+      function calcular() {
+        document.getElementById('tecla,').disabled = false; //reseta o butão ,
+
+        var resultado = document.getElementById("display").innerHTML;
+        if (resultado) {
+            historicoArray.push(resultado);
+          let resultCalculado = document.getElementById("display").innerHTML = eval(resultado);
+            historicoArray.push(resultCalculado);
+        }
+      }
+
+      function historico() {
+        alert(historicoArray.join('\n'));
+      }
+      
+    </script>
+</head>
+<body>
+    <div class="calculadora">
+        <button id="@" class="botao@" onclick="historico()">@</button>
+        <div class="display">
+            <p id="display"></p>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="tecla1" onclick="inserir('1')">1</button>
+                <button id="tecla2" onclick="inserir('2')"">2</button>
+                <button id="tecla3" onclick="inserir('3')"">3</button>
+                <button id="tecla4" onclick="inserir('4')">4</button>
+            </div>
+            <div class="col">
+                <button id="tecla5" onclick="inserir('5')">5</button>
+                <button id="tecla6" onclick="inserir('6')">6</button>
+                <button id="tecla7" onclick="inserir('7')">7</button>
+                <button id="tecla8" onclick="inserir('8')">8</button>
+            </div>
+            <div class="col">
+                <button id="tecla9" onclick="inserir('9')">9</button>
+                <button id="tecla0" onclick="inserir('10')">0</button>
+                <button id="tecla+" onclick="inserir('+')">+</button>
+                <button id="tecla-" onclick="inserir('-')">-</button>
+            </div>
+            <div class="col">
+                <button id="tecla*" onclick="inserir('*')">*</button>
+                <button id="tecla/" onclick="inserir('/')">/</button>
+                <button id="tecla," onclick="inserir(',')">,</button>
+                <button id="tecla=" onclick="calcular()">=</button>
+            </div>
+            <button id="teclac" onclick="limpar()">C</button>
+        </div>
+    </div>
+    
+    
+    
+    
+</body>
+
+</html>
